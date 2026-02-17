@@ -15,7 +15,7 @@ public class LocationsController : ControllerBase
         _locationService = locationService;
         _logger = logger;
     }
-
+    //test
     [HttpPost("CreateLocation")]
     public async Task<ActionResult<Location>> CreateLocationAsync(Location location)
     {

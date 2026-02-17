@@ -6,7 +6,7 @@ public class ApiException : Exception
     public int StatusCode { get; init; }
     public string Details { get; init; }
     public string Instance { get; init; }
-
+    //test
     public ApiException(string type, string title, int statusCode, string details, string instance)
     {
         Type = type;

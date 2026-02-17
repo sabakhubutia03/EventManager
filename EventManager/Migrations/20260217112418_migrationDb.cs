@@ -7,7 +7,7 @@ namespace EventManager.Migrations
     /// <inheritdoc />
     public partial class migrationDb : Migration
     {
-        /// <inheritdoc />
+        /// <inheritdoc />  //test
         protected override void Up(MigrationBuilder migrationBuilder)
         {
 

@@ -7,4 +7,4 @@ public class Location
     public string City { get; set; }
 
     public string Details  { get; set; }
-}
+} //test

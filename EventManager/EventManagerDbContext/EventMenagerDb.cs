@@ -9,5 +9,5 @@ public class EventMenagerDb : DbContext
     
     public DbSet<Location> Locations { get; set; }
   
-    
+    //test
 }

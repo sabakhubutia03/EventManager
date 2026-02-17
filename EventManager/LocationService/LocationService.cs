@@ -13,7 +13,7 @@ public class LocationService : ILocationService
     {
         _eventMenagerDb = eventMenagerDb;
         _logger = logger;
-    }
+    } //test
     public  async Task CreateLocationAsync(Location location)
     {
         if (location == null)
@@ -29,7 +29,7 @@ public class LocationService : ILocationService
         
         _eventMenagerDb.Locations.Add(location);
         await _eventMenagerDb.SaveChangesAsync();
-    }
+    } //test
 
     public async Task<List<Location>> GetAllLocationsAsync()
     {
@@ -45,24 +45,31 @@ public class LocationService : ILocationService
                 "No locations found",
                 "No locations found");
         }
-
+        //test
         return locationList;
     }
 
     public Task<Location> GetLocationByIdAsync(int id)
     {
-        throw new NotImplementedException();
+        throw new NotImplementedException(); 
+        
+        //test
     }
 
     public Task UpdateLocationAsync(Location location)
     {
         throw new NotImplementedException();
+        
+        //test
     }
     
 
     public Task DeleteLocationAsync(Location location)
     {
         throw new NotImplementedException();
+        
+        //test
+        
         
     }
 }
