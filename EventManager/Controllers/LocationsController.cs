@@ -31,4 +31,28 @@ public class LocationsController : ControllerBase
         return Ok(list);
         
     }
+
+    [HttpGet("GetLocation/{id}")]
+    public async Task<ActionResult<Location>> GetLocationAsync(int id)
+    {
+        var locationId = await _locationService.GetLocationByIdAsync(id);
+        _logger.LogInformation("Get Location Information found");
+        return Ok(locationId);
+    }
+
+    [HttpPut("UpdateLocation/{id}")]
+    public async Task<ActionResult<Location>> UpdateLocationAsync(int id,[FromBody] Location location)
+    {
+        var updateLocation =  await _locationService.UpdateLocationAsync(id,location);
+        _logger.LogInformation("Updated Location");
+        return Ok(updateLocation);
+    }
+
+    [HttpDelete("DeleteLocation/{id}")]
+    public async Task<ActionResult<Location>> DeleteLocationAsync(int id)
+    {
+       await _locationService.DeleteLocationAsync(id);
+        _logger.LogInformation("Deleted Location");
+        return Ok();
+    }
 }

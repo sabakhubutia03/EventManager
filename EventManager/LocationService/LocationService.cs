@@ -49,21 +49,60 @@ public class LocationService : ILocationService
         return locationList;
     }
 
-    public Task<Location> GetLocationByIdAsync(int id)
+    public async Task<Location> GetLocationByIdAsync(int id)
     {
-        throw new NotImplementedException(); 
+        var  location =  await _eventMenagerDb.Locations.FirstOrDefaultAsync(l => l.Id == id);
+        if (location == null)
+        {
+            _logger.LogWarning("No location found  Id - {Id}" , id);
+            throw new ApiException(
+                "NotFound",
+                "No location found",
+                404,
+                "No location found",
+                "No location found");
+        }
+        return location;
     }
 
-    public Task UpdateLocationAsync(Location location)
+    public async Task<Location> UpdateLocationAsync(int id,Location location)
     {
-        throw new NotImplementedException();
-
+        var updatedLocation = await _eventMenagerDb.Locations.
+            FirstOrDefaultAsync(i => i.Id == id );
+        if (updatedLocation == null)
+        {
+            _logger.LogWarning("No location found  Id - {Id}" , location.Id);
+            throw new ApiException(
+                "NotFound",
+                "No location found",
+                404,
+                "No location found",
+                "No location found");
+        }
+        
+    _eventMenagerDb.Entry(updatedLocation).CurrentValues.SetValues(location);
+    updatedLocation.Id = id;
+        
+        await _eventMenagerDb.SaveChangesAsync(); 
+        return updatedLocation;
     }
     
 
-    public Task DeleteLocationAsync(Location location)
+    public async Task DeleteLocationAsync(int id)
     {
-        throw new NotImplementedException();
-        
+        var deletedLocation = await _eventMenagerDb.Locations.
+            FirstOrDefaultAsync(d => d.Id == id);
+        if (deletedLocation == null)
+        {
+            _logger.LogWarning("Deleted location {Id} not Found" , id);
+            throw new ApiException(
+                "NotFound",
+                "No location found",
+                404,
+                "No location found",
+                "No location found");
+        }
+        _eventMenagerDb.Locations.Remove(deletedLocation);
+        await _eventMenagerDb.SaveChangesAsync();
     }
 }
