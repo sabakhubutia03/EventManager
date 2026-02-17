@@ -8,7 +8,8 @@ public class LocationsController : ControllerBase
 {
     public readonly ILocationService _locationService;
     public readonly ILogger<LocationsController> _logger;
-
+ 
+    
     public LocationsController(ILocationService locationService, ILogger<LocationsController> logger)
     {
         _locationService = locationService;
