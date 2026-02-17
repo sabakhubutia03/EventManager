@@ -30,5 +30,6 @@ public class LocationsController : ControllerBase
         var list = await _locationService.GetAllLocationsAsync();
         _logger.LogInformation("Get all Locations");
         return Ok(list);
+        
     }
 }

@@ -51,16 +51,18 @@ public class LocationService : ILocationService
 
     public Task<Location> GetLocationByIdAsync(int id)
     {
-        return (Task<Location>)Task.CompletedTask;
+        throw new NotImplementedException();
     }
 
     public Task UpdateLocationAsync(Location location)
     {
-        return Task.CompletedTask;
+        throw new NotImplementedException();
     }
+    
 
     public Task DeleteLocationAsync(Location location)
     {
-        return Task.CompletedTask;
+        throw new NotImplementedException();
+        
     }
 }

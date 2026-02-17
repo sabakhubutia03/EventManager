@@ -15,7 +15,6 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 
-
 builder.Services.AddDbContext<EventMenagerDb>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("EventManagerDb")));
 
@@ -32,7 +31,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseMiddleware<GlobalExceptionHandlingMiddleware>();
+app.UseMiddleware<GlobalExceptionHandlingMiddleware>(); 
+
 
 app.UseHttpsRedirection();
 

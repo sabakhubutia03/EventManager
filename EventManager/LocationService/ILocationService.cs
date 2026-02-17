@@ -12,5 +12,6 @@ public interface ILocationService
     
     Task UpdateLocationAsync(Location location);
     
+    
     Task DeleteLocationAsync(Location location);
 }

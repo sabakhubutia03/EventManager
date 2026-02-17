@@ -50,8 +50,9 @@ public class GlobalExceptionHandlingMiddleware
                 Instance = "Internal server  error"
             };
             context.Response.StatusCode = problemDatail.StatusCode;
+    
             var serialaz = JsonSerializer.Serialize(problemDatail);
             await context.Response.WriteAsync(serialaz);
-        }
+        } 
     }
 }
