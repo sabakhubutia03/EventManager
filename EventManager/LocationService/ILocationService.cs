@@ -7,7 +7,6 @@ public interface ILocationService
     Task CreateLocationAsync(Location location);
     
     Task<List<Location>> GetAllLocationsAsync();
-    //test
     Task<Location> GetLocationByIdAsync(int id);
     
     Task UpdateLocationAsync(Location location);

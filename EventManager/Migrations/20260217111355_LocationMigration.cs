@@ -7,7 +7,7 @@ namespace EventManager.Migrations
     /// <inheritdoc />
     public partial class LocationMigration : Migration
     {
-        /// <inheritdoc />  //test
+        /// <inheritdoc /> 
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(

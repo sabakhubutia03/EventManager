@@ -8,4 +8,4 @@ public class ApiProblemDitaile
     public string Details { get; init; }
 
     public string Instance { get; init; }
-}  //test
+} 

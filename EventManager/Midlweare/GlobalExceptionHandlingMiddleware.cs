@@ -6,7 +6,6 @@ namespace EventManager.Midlweare;
 public class GlobalExceptionHandlingMiddleware
 {
     private readonly RequestDelegate _next;
-    //test
     public GlobalExceptionHandlingMiddleware(RequestDelegate next)
     {
         _next = next;

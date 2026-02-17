@@ -8,14 +8,12 @@ public class LocationsController : ControllerBase
 {
     public readonly ILocationService _locationService;
     public readonly ILogger<LocationsController> _logger;
-    public string testgit;
     
     public LocationsController(ILocationService locationService, ILogger<LocationsController> logger)
     {
         _locationService = locationService;
         _logger = logger;
     }
-    //test
     [HttpPost("CreateLocation")]
     public async Task<ActionResult<Location>> CreateLocationAsync(Location location)
     {

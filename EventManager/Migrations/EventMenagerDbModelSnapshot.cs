@@ -6,7 +6,6 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
-//test
 namespace EventManager.Migrations
 {
     [DbContext(typeof(EventMenagerDb))]
