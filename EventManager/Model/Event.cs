@@ -12,5 +12,5 @@ public class Event
     public int LocationId { get; set; }
     
     [JsonIgnore]
-    public Location Location { get; set; }
+    public Location? Location { get; set; }
 }

@@ -21,7 +21,9 @@ public class EventService : IEventServices
             _logger.LogWarning("EndDate must be after StartDate");
            throw new Exception("EndDate must be after StartDate");
         }
-        var location =  await _db.Events.
+    
+        
+        var location = await _db.Locations.
             AnyAsync(i => i.Id == _event.LocationId);
         if (!location)
         {
@@ -87,8 +89,9 @@ public class EventService : IEventServices
                 "No Event found");
         }
 
+        
         _db.Events.Remove(delete);
-        _db.SaveChanges();
+        await _db.SaveChangesAsync();
 
     }
 }
