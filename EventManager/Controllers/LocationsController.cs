@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace EventManager.Controllers;
 [ApiController]
+[Route("Location/")]
 public class LocationsController : ControllerBase
 {
     public readonly ILocationService _locationService;

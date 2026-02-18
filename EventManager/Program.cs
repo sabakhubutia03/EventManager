@@ -22,6 +22,7 @@ builder.Services.AddDbContext<EventMenagerDb>(options =>
 builder.Services.AddOpenApi();
 
 builder.Services.AddScoped<ILocationService, LocationService>();
+builder.Services.AddScoped<IEventServices, EventService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
