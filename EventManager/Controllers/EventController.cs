@@ -27,12 +27,20 @@ public class EventController : ControllerBase
 
     }
 
+    [HttpGet("EventAll")]
+
+    public async Task<ActionResult<List<Event>>> GetEventAll()
+    {
+     var getAllEvent=  await _eventServices.GetAllEventsAsync();
+        _logger.LogInformation("Event Information found");
+        return Ok(getAllEvent);
+    }
     [HttpPost]
     public async Task<ActionResult<Event>> PostEvent(Event _event)
     {
-        await _eventServices.CreateEventAsync(_event);
+     var creatEvent =  await _eventServices.CreateEventAsync(_event);
         _logger.LogInformation("Event created");
-        return Ok();
+        return Ok(creatEvent);
     }
 
     [HttpPut("{id}")]

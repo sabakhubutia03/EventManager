@@ -19,7 +19,13 @@ public class EventService : IEventServices
         if (_event.EndDate <= _event.StartDate)
         {
             _logger.LogWarning("EndDate must be after StartDate");
-           throw new Exception("EndDate must be after StartDate");
+            throw new ApiException(
+                "conflict ",
+                "Invalid date range",
+                409,
+                "EndDate must be after StartDate",
+                "Validation error");
+
         }
     
         
@@ -29,9 +35,9 @@ public class EventService : IEventServices
         {
             _logger.LogWarning("Location does not exist");
             throw new ApiException(
-                "NotFound",
+                "Bedrequest",
                 "No location found",
-                404,
+                400,
                 "Event not found",
                 "Location does not exist");
         }
@@ -41,11 +47,39 @@ public class EventService : IEventServices
         return _event;
     }
 
-    public Task<Event> GetEventIdAsync(int id)
+    public async Task<Event> GetEventIdAsync(int id)
     {
-        return _db.Events.
-            Include(i => i.Location)
-            .FirstOrDefaultAsync(i => i.Id == id);
+      var getEventId =  await _db.Events.
+          FirstOrDefaultAsync(i => i.Id == id);
+      if (getEventId == null)
+      {
+          _logger.LogWarning("Event  Id {Id} not found" , id);
+          throw new ApiException(
+              "NotFound",
+              "No event",
+              404,
+              "Event not found",
+              "Event not found");
+      }
+
+      return getEventId;
+    }
+
+    public async Task<List<Event>> GetAllEventsAsync()
+    {
+        var getAllEvent =  await  _db.Events.ToListAsync();
+        if (getAllEvent == null)
+        {
+            _logger.LogWarning("Events not found");
+            throw new ApiException(
+                "NotFound",
+                "No events",
+                404,
+                "Events not found",
+                "Events not found");
+        }
+        
+        return getAllEvent;
     }
 
     public  async Task<Event> updateEventAsync(int id, Event _event)
