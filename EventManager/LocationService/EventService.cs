@@ -20,9 +20,9 @@ public class EventService : IEventServices
         {
             _logger.LogWarning("EndDate must be after StartDate");
             throw new ApiException(
-                "conflict ",
+                "BadRequest",
                 "Invalid date range",
-                409,
+                400,
                 "EndDate must be after StartDate",
                 "Validation error");
 
@@ -35,11 +35,11 @@ public class EventService : IEventServices
         {
             _logger.LogWarning("Location does not exist");
             throw new ApiException(
-                "Bedrequest",
-                "No location found",
-                400,
-                "Event not found",
-                "Location does not exist");
+                "NotFound",
+                "Location not found",
+                404,
+                "Location does not exist",
+                "Validation error");
         }
         
         _db.Events.Add(_event);
