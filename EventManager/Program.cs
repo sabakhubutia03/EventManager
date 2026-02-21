@@ -23,6 +23,7 @@ builder.Services.AddOpenApi();
 
 builder.Services.AddScoped<ILocationService, LocationService>();
 builder.Services.AddScoped<IEventServices, EventService>();
+builder.Services.AddScoped<IRegistrationService,RegistrationService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
