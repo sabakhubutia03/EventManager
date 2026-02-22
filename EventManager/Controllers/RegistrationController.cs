@@ -17,7 +17,7 @@ public class RegistrationController : ControllerBase
         _logger = logger;
     }
 
-    [HttpPost("Registration")]
+    [HttpPost("Registration/{eventId}/{attendeeId}")]
     public async Task<ActionResult> RegisterAttendeeToEvent(int eventId, int attendeeId)
     {
         var registation = await _registrationService
@@ -34,17 +34,17 @@ public class RegistrationController : ControllerBase
         return Ok();
     }
 
-    [HttpGet("GetEventAttendees{eventId}")]
-    public async Task<ActionResult> GetEventAttendees(int eventId)
+    [HttpGet("GetEventAttendees/{eventId}")]
+    public async Task<ActionResult<List<Attendee>>> GetEventAttendees(int eventId)
     {
         var attends = await  _registrationService.GetEventAttendees(eventId);
         _logger.LogInformation("Getting events attendees");
         return Ok(attends);
     }
 
-    [HttpGet("GetAttendees{attendeeId}")]
+    [HttpGet("GetAttendees/{attendeeId}")]
 
-    public async Task<ActionResult> GetAttendeeEvents(int attendeeId)
+    public async Task<ActionResult<List<Event>>> GetAttendeeEvents(int attendeeId)
     {
         var events = await _registrationService.GetAttendeeEvents(attendeeId);
         _logger.LogInformation("Getting events attendees");

@@ -22,6 +22,27 @@ namespace EventManager.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("EventManager.Model.Attendee", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FullName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Attendee", (string)null);
+                });
+
             modelBuilder.Entity("EventManager.Model.Event", b =>
                 {
                     b.Property<int>("Id")
@@ -79,6 +100,24 @@ namespace EventManager.Migrations
                     b.ToTable("Locations");
                 });
 
+            modelBuilder.Entity("EventManager.Model.Registration", b =>
+                {
+                    b.Property<int>("EventId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("AttendeeId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("RegisteredAtUtc")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("EventId", "AttendeeId");
+
+                    b.HasIndex("AttendeeId");
+
+                    b.ToTable("Registration", (string)null);
+                });
+
             modelBuilder.Entity("EventManager.Model.Event", b =>
                 {
                     b.HasOne("EventManager.Model.Location", "Location")
@@ -88,6 +127,30 @@ namespace EventManager.Migrations
                         .IsRequired();
 
                     b.Navigation("Location");
+                });
+
+            modelBuilder.Entity("EventManager.Model.Registration", b =>
+                {
+                    b.HasOne("EventManager.Model.Attendee", "Attendee")
+                        .WithMany("Registrations")
+                        .HasForeignKey("AttendeeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("EventManager.Model.Event", "Event")
+                        .WithMany()
+                        .HasForeignKey("EventId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Attendee");
+
+                    b.Navigation("Event");
+                });
+
+            modelBuilder.Entity("EventManager.Model.Attendee", b =>
+                {
+                    b.Navigation("Registrations");
                 });
 #pragma warning restore 612, 618
         }
