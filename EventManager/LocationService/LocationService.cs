@@ -71,7 +71,7 @@ public class LocationService : ILocationService
             FirstOrDefaultAsync(i => i.Id == id );
         if (updatedLocation == null)
         {
-            _logger.LogWarning("No location found  Id - {Id}" , location.Id);
+            _logger.LogWarning("No location found Id - {Id}", id);
             throw new ApiException(
                 "NotFound",
                 "No location found",
@@ -80,8 +80,12 @@ public class LocationService : ILocationService
                 "No location found");
         }
         
-    _eventMenagerDb.Entry(updatedLocation).CurrentValues.SetValues(location);
-    updatedLocation.Id = id;
+    // _eventMenagerDb.Entry(updatedLocation).CurrentValues.SetValues(location);
+    // updatedLocation.Id = id;
+    
+    updatedLocation.Name = location.Name;
+    updatedLocation.City = location.City;
+    updatedLocation.Details = location.Details;
         
         await _eventMenagerDb.SaveChangesAsync(); 
         return updatedLocation;

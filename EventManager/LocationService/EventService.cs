@@ -68,7 +68,7 @@ public class EventService : IEventServices
     public async Task<List<Event>> GetAllEventsAsync()
     {
         var getAllEvent =  await  _db.Events.ToListAsync();
-        if (getAllEvent == null)
+        if (!getAllEvent.Any())
         {
             _logger.LogWarning("Events not found");
             throw new ApiException(
@@ -91,10 +91,10 @@ public class EventService : IEventServices
            _logger.LogWarning("No location found");
            throw new ApiException(
                "NotFound",
-               "No location found",
+               "Event not found",
                404,
-               "No location found",
-               "No location found");
+               "Event not found",
+               "Event not found");
        }
        
       
@@ -105,7 +105,7 @@ public class EventService : IEventServices
        updateEvent.LocationId = _event.LocationId;
        
        await _db.SaveChangesAsync();
-       return _event;
+       return updateEvent;
     }
 
     public async Task DeleteEventAsync(int id)
