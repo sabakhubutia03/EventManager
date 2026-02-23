@@ -16,6 +16,18 @@ public class EventService : IEventServices
     }
     public async Task<Event> CreateEventAsync(Event _event)
     {
+        
+        if (string.IsNullOrWhiteSpace(_event.Title))
+        {
+            _logger.LogWarning("Event title is empty");
+            throw new ApiException(
+                "BadRequest",
+                "Event title cannot be empty",
+                400,
+                "Title is required",
+                "Validation error");
+        }
+        
         if (_event.EndDate <= _event.StartDate)
         {
             _logger.LogWarning("EndDate must be after StartDate");
@@ -26,6 +38,17 @@ public class EventService : IEventServices
                 "EndDate must be after StartDate",
                 "Validation error");
 
+        }
+        
+        if (_event.LocationId <= 0)
+        {
+            _logger.LogWarning("Invalid LocationId");
+            throw new ApiException(
+                "BadRequest",
+                "LocationId is invalid",
+                400,
+                "LocationId must be provided",
+                "Validation error");
         }
     
         

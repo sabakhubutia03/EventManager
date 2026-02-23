@@ -14,17 +14,19 @@ public class LocationService : ILocationService
         _eventMenagerDb = eventMenagerDb;
         _logger = logger;
     } 
-    public  async Task CreateLocationAsync(Location location)
+    public async Task CreateLocationAsync(Location location)
     {
-        if (location == null)
+        
+        if (string.IsNullOrWhiteSpace(location.Name) ||
+            string.IsNullOrWhiteSpace(location.City))
         {
-            _logger.LogWarning("Location is null");
+            _logger.LogWarning("Event title is empty");
             throw new ApiException(
-                "BadRequest" ,
-                "Location is null empty",
+                "BadRequest",
+                "Event title cannot be empty",
                 400,
-                "Location is null",
-                "Location is empty");
+                "Title is required",
+                "Validation error");
         }
         
         _eventMenagerDb.Locations.Add(location);
