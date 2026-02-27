@@ -72,7 +72,7 @@ namespace EventManager.Migrations
 
                     b.HasIndex("LocationId");
 
-                    b.ToTable("Events");
+                    b.ToTable("Events", (string)null);
                 });
 
             modelBuilder.Entity("EventManager.Model.Location", b =>
