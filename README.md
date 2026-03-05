@@ -1,7 +1,7 @@
 ### 📅 EventManager API
 A comprehensive ASP.NET Core Web API designed to manage events, locations, and attendees. This project was developed as a final assignment to demonstrate advanced backend development skills, including complex entity relationships and business logic validation.
 
-🏗 Architecture & Patterns
+### 🏗 Architecture & Patterns
 Clean Controller Structure: Business logic is decoupled from controllers and moved into the Service layer (Controller -> Service -> Storage).
 
 Dependency Injection (DI): Leveraged for maintaining loosely coupled components and efficient database context management.
